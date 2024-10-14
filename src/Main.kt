@@ -1,7 +1,7 @@
 /**
  * ------------------------------------------------------------------------
  * PROJECT NAME HERE
- * Level 2 programming project
+ * Level 3 programming project
  *
  * by YOUR NAME HERE
  *
@@ -21,15 +21,20 @@ import javax.swing.*
 
 //=============================================================================================
 
+class Location(val type: String)
+
+//=============================================================================================
+
 /**
  * GUI class
  * Defines the UI and responds to events
  */
-class GUI : JFrame(), ActionListener {
+class MenuGUI : JFrame(), ActionListener {
 
     // Setup some properties to hold the UI elements
-    private lateinit var exampleLabel: JLabel
-    private lateinit var exampleButton: JButton
+    private lateinit var titleLabel: JLabel
+    private lateinit var prepareButton: JButton
+    private lateinit var startButton: JButton
 
     /**
      * Create, build and run the UI
@@ -47,8 +52,8 @@ class GUI : JFrame(), ActionListener {
      * Configure the main window
      */
     private fun setupWindow() {
-        title = "Hello, World!"
-        contentPane.preferredSize = Dimension(300, 170)
+        title = "Caves, Creatures and Carrots"
+        contentPane.preferredSize = Dimension(300, 300)
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         isResizable = false
         layout = null
@@ -62,16 +67,22 @@ class GUI : JFrame(), ActionListener {
     private fun buildUI() {
         val baseFont = Font(Font.SANS_SERIF, Font.PLAIN, 20)
 
-        exampleLabel = JLabel("Hello, World!", SwingConstants.CENTER)
-        exampleLabel.bounds = Rectangle(30, 30, 240, 40)
-        exampleLabel.font = baseFont
-        add(exampleLabel)
+        titleLabel = JLabel("Caves, Creatures and Carrots", SwingConstants.CENTER)
+        titleLabel.bounds = Rectangle(30, 30, 240, 40)
+        titleLabel.font = baseFont
+        add(titleLabel)
 
-        exampleButton = JButton("Click Me")
-        exampleButton.bounds = Rectangle(30,100,240,40)
-        exampleButton.font = baseFont
-        exampleButton.addActionListener(this)
-        add(exampleButton)
+        prepareButton = JButton("Prepare")
+        prepareButton.bounds = Rectangle(30,130,240,40)
+        prepareButton.font = baseFont
+        prepareButton.addActionListener(this)
+        add(prepareButton)
+
+        startButton = JButton("Enter the Cave")
+        startButton.bounds = Rectangle(30,186,240,40)
+        startButton.font = baseFont
+        startButton.addActionListener(this)
+        add(startButton)
     }
 
     /**
@@ -79,18 +90,75 @@ class GUI : JFrame(), ActionListener {
      */
     override fun actionPerformed(e: ActionEvent?) {
         when (e?.source) {
-            exampleButton -> exampleAction()
+            prepareButton -> prepareAction()
+            startButton -> startAction()
         }
     }
 
     /**
      * An Example Action
      */
-    private fun exampleAction() {
-        exampleLabel.text = "You Clicked!"
+    private fun prepareAction() {
+        startButton.isEnabled = false
+        SetupGUI()
+    }
+
+    private fun startAction() {
+        titleLabel.text = "You Clicked!"
     }
 }
 
+//=============================================================================================
+
+class SetupGUI : JFrame(), ActionListener {
+    // Setup some properties to hold the UI elements
+    private lateinit var exitButton: JButton
+
+    /**
+     * Create, build and run the UI
+     */
+    init {
+        setupWindow()
+        buildUI()
+
+        // Show the app, centred on screen
+        setLocationRelativeTo(null)
+        isVisible = true
+    }
+
+    private fun setupWindow() {
+        title = "Setup"
+        contentPane.preferredSize = Dimension(500, 500)
+        defaultCloseOperation = WindowConstants.HIDE_ON_CLOSE
+        isResizable = false
+        layout = null
+
+        pack()
+    }
+
+    private fun buildUI() {
+        val baseFont = Font(Font.SANS_SERIF, Font.PLAIN, 20)
+
+        exitButton = JButton("Exit")
+        exitButton.bounds = Rectangle(30,130,240,40)
+        exitButton.font = baseFont
+        exitButton.addActionListener(this)
+        add(exitButton)
+    }
+
+    override fun actionPerformed(e: ActionEvent?) {
+        when (e?.source) {
+            exitButton -> exitAction()
+        }
+    }
+
+    /**
+     * An Example Action
+     */
+    private fun exitAction() {
+
+    }
+}
 
 //=============================================================================================
 
@@ -102,7 +170,7 @@ fun main() {
     FlatDarkLaf.setup()
 
     // Create the UI
-    GUI()
+    MenuGUI()
 }
 
 

@@ -1,6 +1,6 @@
-# PROJECT NAME HERE
+# Caves, Creatures and Carrots
 
-### Level 3 Programming Project by YOUR NAME HERE
+### Level 3 Programming Project by Daniel Thomas
 
 This project is assessed against [AS91906](https://www.nzqa.govt.nz/nqfdocs/ncea-resource/achievements/2019/as91906.pdf)
 
