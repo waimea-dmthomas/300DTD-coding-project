@@ -13,7 +13,6 @@
 
 
 import com.formdev.flatlaf.FlatDarkLaf
-import com.formdev.flatlaf.FlatLightLaf
 import java.awt.*
 import java.awt.event.*
 import javax.swing.*
@@ -44,14 +43,14 @@ class Location(val name: String, val desc: String) {
     fun addSouth(location: Location) {
         if (south == null) {
             south = location
-            location.addEast(this)
+            location.addNorth(this)
         }
     }
 
     fun addWest(location: Location) {
         if (west == null) {
             west = location
-            location.addNorth(this)
+            location.addEast(this)
         }
     }
 }
@@ -71,14 +70,14 @@ class MenuGUI : JFrame(), ActionListener {
     // Setup some properties to hold the UI elements
     private lateinit var titleLabel: JLabel
 
-    private lateinit var prepareButton: JButton
     private lateinit var startButton: JButton
-    private lateinit var exitPrepareButton: JButton
 
     private lateinit var northButton: JButton
     private lateinit var eastButton: JButton
     private lateinit var southButton: JButton
     private lateinit var westButton: JButton
+
+    private lateinit var inventoryButton: JButton
 
     private lateinit var statusHeaderLabel: JLabel
     private lateinit var statusLabel: JLabel
@@ -102,9 +101,38 @@ class MenuGUI : JFrame(), ActionListener {
     }
 
     private fun setupMap() {
-        val surface = Location("Surface", "The opening of a large cave.")
+        val opening = Location("Opening", "The opening of a large cave.")
+        val woods = Location("Woods", "The mouth of the cave.")
+        val hut = Location("Hut", "The mouth of the cave.")
+        val mouth = Location("Mouth", "The mouth of the cave.")
+        val eastFork = Location("East Fork", "The mouth of the cave.")
+        val westFork = Location("West Fork", "The mouth of the cave.")
+        val pit = Location("Pit", "The mouth of the cave.")
+        val stoneDoor = Location("Stone Door", "The mouth of the cave.")
 
-        locations.add(surface)
+        locations.add(opening)
+        opening.addNorth(mouth)
+        opening.addSouth(woods)
+
+        locations.add(woods)
+        woods.addEast(hut)
+
+        locations.add(hut)
+
+        locations.add(mouth)
+        mouth.addEast(eastFork)
+        mouth.addWest(westFork)
+
+        locations.add(eastFork)
+        eastFork.addNorth(stoneDoor)
+
+        locations.add(stoneDoor)
+
+        locations.add(westFork)
+        westFork.addNorth(pit)
+
+        locations.add(pit)
+
     }
 
     /**
@@ -131,24 +159,11 @@ class MenuGUI : JFrame(), ActionListener {
         titleLabel.font = baseFont
         add(titleLabel)
 
-        prepareButton = JButton("Prepare")
-        prepareButton.bounds = Rectangle(130,309,240,40)
-        prepareButton.font = baseFont
-        prepareButton.addActionListener(this)
-        add(prepareButton)
-
         startButton = JButton("Enter the Cave")
         startButton.bounds = Rectangle(130,374,240,40)
         startButton.font = baseFont
         startButton.addActionListener(this)
         add(startButton)
-
-        exitPrepareButton = JButton("Exit")
-        exitPrepareButton.bounds = Rectangle(130,374,240,40)
-        exitPrepareButton.font = baseFont
-        exitPrepareButton.addActionListener(this)
-        exitPrepareButton.isVisible = false
-        add(exitPrepareButton)
 
         northButton = JButton("^")
         northButton.bounds = Rectangle(225,351,50,50)
@@ -179,28 +194,35 @@ class MenuGUI : JFrame(), ActionListener {
         add(westButton)
 
         statusHeaderLabel = JLabel("STATUS", SwingConstants.CENTER)
-        statusHeaderLabel.bounds = Rectangle(119, 278, 262, 20)
+        statusHeaderLabel.bounds = Rectangle(119, 54, 262, 20)
         statusHeaderLabel.font = baseFont
         statusHeaderLabel.isVisible = false
         add(statusHeaderLabel)
 
         statusLabel = JLabel("", SwingConstants.CENTER)
-        statusLabel.bounds = Rectangle(119, 298, 262, 20)
+        statusLabel.bounds = Rectangle(119, 74, 262, 176)
         statusLabel.font = baseFont
         statusLabel.isVisible = false
         add(statusLabel)
 
         locationHeaderLabel = JLabel("LOCATION", SwingConstants.CENTER)
-        locationHeaderLabel.bounds = Rectangle(119, 236, 262, 20)
+        locationHeaderLabel.bounds = Rectangle(119, 9, 262, 20)
         locationHeaderLabel.font = baseFont
         locationHeaderLabel.isVisible = false
         add(locationHeaderLabel)
 
         locationLabel = JLabel("", SwingConstants.CENTER)
-        locationLabel.bounds = Rectangle(119, 254, 262, 20)
+        locationLabel.bounds = Rectangle(119, 27, 262, 20)
         locationLabel.font = baseFont
         locationLabel.isVisible = false
         add(locationLabel)
+
+        inventoryButton = JButton("Inventory")
+        inventoryButton.bounds = Rectangle(16,411,131,50)
+        inventoryButton.font = baseFont
+        inventoryButton.addActionListener(this)
+        inventoryButton.isVisible = false
+        add(inventoryButton)
     }
 
     /**
@@ -208,9 +230,7 @@ class MenuGUI : JFrame(), ActionListener {
      */
     override fun actionPerformed(e: ActionEvent?) {
         when (e?.source) {
-            prepareButton -> prepareAction()
             startButton -> startAction()
-            exitPrepareButton -> exitPrepareAction()
 
             northButton -> goNorth()
             eastButton -> goEast()
@@ -222,22 +242,16 @@ class MenuGUI : JFrame(), ActionListener {
     /**
      * Functions
      */
-    private fun prepareAction() {
-        startButton.isVisible = false
-        prepareButton.isVisible = false
-        titleLabel.isVisible = false
-        exitPrepareButton.isVisible = true
-    }
 
     private fun startAction() {
         startButton.isVisible = false
-        prepareButton.isVisible = false
         titleLabel.isVisible = false
 
         northButton.isVisible = true
         eastButton.isVisible = true
         southButton.isVisible = true
         westButton.isVisible = true
+        inventoryButton.isVisible = true
 
         statusHeaderLabel.isVisible = true
         statusLabel.isVisible = true
@@ -245,12 +259,6 @@ class MenuGUI : JFrame(), ActionListener {
         locationLabel.isVisible = true
 
         showLocation()
-    }
-
-    private fun exitPrepareAction() {
-        startButton.isVisible = true
-        prepareButton.isVisible = true
-        titleLabel.isVisible = true
     }
 
     private fun showLocation() {
@@ -299,19 +307,23 @@ class MenuGUI : JFrame(), ActionListener {
     }
 
     private fun goNorth() {
-
+        currentLocation = currentLocation.north!!
+        showLocation()
     }
 
     private fun goEast() {
-
+        currentLocation = currentLocation.east!!
+        showLocation()
     }
 
     private fun goSouth() {
-
+        currentLocation = currentLocation.south!!
+        showLocation()
     }
 
     private fun goWest() {
-
+        currentLocation = currentLocation.west!!
+        showLocation()
     }
 }
 
