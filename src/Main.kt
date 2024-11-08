@@ -78,6 +78,7 @@ class MenuGUI : JFrame(), ActionListener {
     private lateinit var westButton: JButton
 
     private lateinit var inventoryButton: JButton
+    private lateinit var inspectButton: JButton
 
     private lateinit var statusHeaderLabel: JLabel
     private lateinit var statusLabel: JLabel
@@ -101,14 +102,14 @@ class MenuGUI : JFrame(), ActionListener {
     }
 
     private fun setupMap() {
-        val opening = Location("Opening", "You awake in a rough hilly plain. In front of you is the opening of a cave and behind you is the ")
-        val woods = Location("Woods", "The mouth of the cave.")
-        val hut = Location("Hut", "The mouth of the cave.")
-        val mouth = Location("Mouth", "The mouth of the cave.")
-        val eastFork = Location("East Fork", "The mouth of the cave.")
-        val westFork = Location("West Fork", "The mouth of the cave.")
-        val pit = Location("Pit", "The mouth of the cave.")
-        val stoneDoor = Location("Stone Door", "The mouth of the cave.")
+        val opening = Location("Opening", "You awake in a rough hilly plain. In front of you is the opening of a cave and behind you is the entrance of a forest.")
+        val woods = Location("Woods", "You are surrounded by trees and vines in a thick wooded area. To your east is a crooked wooden hut with a busted door.")
+        val hut = Location("Hut", "You are in a dilapidated old hut. Inside there is a destroyed bed frame, a broken bookshelf and a raggedy spool of rope.")
+        val mouth = Location("Mouth", "You are in the mouth of an ominous cave opening. There are two different tunnels to your west and your east.")
+        val eastFork = Location("East Fork", "You are in a cramped, dank tunnel.")
+        val westFork = Location("West Fork", "You are in a grand large opening.")
+        val pit = Location("Pit", "In front of you is a cavernous pit dropping directly into a bottomless darkness.")
+        val stoneDoor = Location("Stone Door", "In front of you is a solid stone door with strange engravings. In the middle is an empty gap.")
 
         locations.add(opening)
         opening.addNorth(mouth)
@@ -139,7 +140,7 @@ class MenuGUI : JFrame(), ActionListener {
      * Configure the main window
      */
     private fun setupWindow() {
-        title = "Caves, Creatures and Carrots"
+        title = "Cave Escape"
         contentPane.preferredSize = Dimension(500, 500)
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         isResizable = false
@@ -154,7 +155,7 @@ class MenuGUI : JFrame(), ActionListener {
     private fun buildUI() {
         val baseFont = Font(Font.SANS_SERIF, Font.PLAIN, 20)
 
-        titleLabel = JLabel("Caves, Creatures and Carrots", SwingConstants.CENTER)
+        titleLabel = JLabel("Cave Escape", SwingConstants.CENTER)
         titleLabel.bounds = Rectangle(76, 62, 348, 36)
         titleLabel.font = baseFont
         add(titleLabel)
@@ -223,6 +224,13 @@ class MenuGUI : JFrame(), ActionListener {
         inventoryButton.addActionListener(this)
         inventoryButton.isVisible = false
         add(inventoryButton)
+
+        inspectButton = JButton("Inspect")
+        inspectButton.bounds = Rectangle(16,350,131,50)
+        inspectButton.font = baseFont
+        inspectButton.addActionListener(this)
+        inspectButton.isVisible = false
+        add(inspectButton)
     }
 
     /**
@@ -252,6 +260,7 @@ class MenuGUI : JFrame(), ActionListener {
         southButton.isVisible = true
         westButton.isVisible = true
         inventoryButton.isVisible = true
+        inspectButton.isVisible = true
 
         statusHeaderLabel.isVisible = true
         statusLabel.isVisible = true
