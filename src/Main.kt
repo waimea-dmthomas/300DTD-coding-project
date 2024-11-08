@@ -101,7 +101,7 @@ class MenuGUI : JFrame(), ActionListener {
     }
 
     private fun setupMap() {
-        val opening = Location("Opening", "The opening of a large cave.")
+        val opening = Location("Opening", "You awake in a rough hilly plain. In front of you is the opening of a cave and behind you is the ")
         val woods = Location("Woods", "The mouth of the cave.")
         val hut = Location("Hut", "The mouth of the cave.")
         val mouth = Location("Mouth", "The mouth of the cave.")
