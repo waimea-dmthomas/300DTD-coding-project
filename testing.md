@@ -4,18 +4,16 @@
 
 The project involves the programming of a game.
 
-BRIEF DESCRIPTION OF GAME HERE
-BRIEF DESCRIPTION OF GAME HERE
-BRIEF DESCRIPTION OF GAME HERE
+The game is a puzzle adventure game where the player must venture into a cave and then escape with the treasure.
 
 ### Game Features and Rules
 
 The game has the following features and/or rules:
 
-- GAME FEATURE / RULE
-- GAME FEATURE / RULE
-- GAME FEATURE / RULE
-- GAME FEATURE / RULE
+- Moving around the map with up/down/left/right buttons
+- Collecting items placed at certain locations
+- Using items to unlock new locations
+- A timer that loses the game when it runs out
 
 ---
 
@@ -23,65 +21,67 @@ The game has the following features and/or rules:
 
 The following game features / functionality and player actions will need to be tested:
 
-- FUNCTIONALITY / FEATURE / ACTION TO TEST
-- FUNCTIONALITY / FEATURE / ACTION TO TEST
-- FUNCTIONALITY / FEATURE / ACTION TO TEST
-- FUNCTIONALITY / FEATURE / ACTION TO TEST
-- FUNCTIONALITY / FEATURE / ACTION TO TEST
+- Moving to a different location
+- Collecting an item
+- Using an item
+- Completing the game
+- Running out of time
 
 The following tests will be run against the completed game. The tests should result in the expected outcomes shown.
 
 
-### TEST NAME HERE
+### Moving to a different location
 
-TEST DESCRIPTION HERE
-
-#### Test Data / Actions to Use
-
-TEST DATA TO USE DETAILED HERE
-
-#### Expected Outcome
-
-EXPECTED OUTCOME DETAILED HERE
-
-
-### TEST NAME HERE
-
-TEST DESCRIPTION HERE
+To test this I will need to press the buttons to move to a different location
 
 #### Test Data / Actions to Use
 
-TEST DATA TO USE DETAILED HERE
+The test data I will use is moving north into the cave entrance from the start location using the north button.
 
 #### Expected Outcome
 
-EXPECTED OUTCOME DETAILED HERE
+The expected outcome is that the player will be able to move to valid locations, if a location is blocked then the game
+should have a message telling them that its blocked, and if there's no valid location there the button should be greyed out.
 
 
-### TEST NAME HERE
+### Collecting an item
 
-TEST DESCRIPTION HERE
+To test this I will need to press the inspect button in a location with an item in it
 
 #### Test Data / Actions to Use
 
-TEST DATA TO USE DETAILED HERE
+To test this I will be picking up the rope item in the hut location using the inspect button.
 
 #### Expected Outcome
 
-EXPECTED OUTCOME DETAILED HERE
+The expected outcome is that the item will disappear from the location and will now be in the players inventory. If there was
+no item in the location then the expected result is that the game would give a message saying so.
 
 
-### TEST NAME HERE
+### Using an item
 
-TEST DESCRIPTION HERE
+To test this I will need to use an item in a location that needs that item to be used.
 
 #### Test Data / Actions to Use
 
-TEST DATA TO USE DETAILED HERE
+To test this I will be using the rope item in the pit location to traverse the pit using the use button.
 
 #### Expected Outcome
 
-EXPECTED OUTCOME DETAILED HERE
+The expected outcome is that this will allow the player to bypass the barrier (pit) and access the next area. If this wasn't a valid location for an item to be used, the expected outcome is that the game would give a message explaining this.
+
+
+### Completing the Game
+
+To test this I will need to complete the game.
+
+#### Test Data / Actions to Use
+
+I will be walking through the exit of the game with the treasure item collected.
+
+#### Expected Outcome
+
+The expected outcome is that the game will show a completion message upon walking through the exit with the treasure. If the treasure hadn't been obtained, there should be a message to the player explaining this.
 
 
 ---
@@ -89,38 +89,41 @@ EXPECTED OUTCOME DETAILED HERE
 
 ## Evidence / Results of Testing
 
-### TEST NAME HERE
+### Moving to a different location
 
-ACTUAL RESULTS OF TESTING SHOWN HERE
+1. Pressing north button
 
-![](images/placeholder.jpg)
+![](images/img.png)
 
-NOTES REGARDING THE RESULTS HERE
+2. Moving to cave mouth location
 
+![](images/img_1.png)
 
-### TEST NAME HERE
-
-ACTUAL RESULTS OF TESTING SHOWN HERE
-
-![](images/placeholder.jpg)
-
-NOTES REGARDING THE RESULTS HERE
+These are the expected results.
 
 
-### TEST NAME HERE
+### Collecting an item
 
-ACTUAL RESULTS OF TESTING SHOWN HERE
+![](images/img_2.png)
 
-![](images/placeholder.jpg)
-
-NOTES REGARDING THE RESULTS HERE
+When pressing the inspect button in the hut, the rope is given to the player as expected.
 
 
-### TEST NAME HERE
+### Using an item
 
-ACTUAL RESULTS OF TESTING SHOWN HERE
+![](images/img_3.png)
 
-![](images/placeholder.jpg)
+Upon pressing "use" in the pit, the player can now press north and move to the next location.
 
-NOTES REGARDING THE RESULTS HERE
 
+### Completing the game
+
+![](images/img_4.png)
+
+Upon walking through the exit with the treasure, the game completion screen comes up as expected.
+
+### Running out of time
+
+![](images/img_5.png)
+
+When the timer hits 0, the game switches to the game over screen as expected.
