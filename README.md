@@ -1,4 +1,4 @@
-# Caves, Creatures and Carrots
+# Treasure Hunt
 
 ### Level 3 Programming Project by Daniel Thomas
 
