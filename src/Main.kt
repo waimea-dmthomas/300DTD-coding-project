@@ -1,13 +1,9 @@
 /**
  * ------------------------------------------------------------------------
- * PROJECT NAME HERE
+ * Treasure Hunt
  * Level 3 programming project
  *
- * by YOUR NAME HERE
- *
- * BRIEF PROJECT DESCRIPTION HERE
- * BRIEF PROJECT DESCRIPTION HERE
- * BRIEF PROJECT DESCRIPTION HERE
+ * by Daniel Thomas
  * ------------------------------------------------------------------------
  */
 
